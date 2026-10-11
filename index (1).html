@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Untuk Dedee Azzaa</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Fraunces:ital,wght@1,500&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#241716;--card:#3b2623;--card2:#2f1f1d;--gold:#e2ac6b;--pink:#ff7b9c;--txt:#f3e6df;--dim:#a58f87;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--txt);font:15px/1.5 'DM Sans',system-ui,sans-serif;overflow:hidden}
+.scr{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:16px;text-align:center;overflow-y:auto}
+.scr.on{display:flex}
+h2{font:italic 500 28px/1.15 'Fraunces',Georgia,serif}
+.dim{color:var(--dim);font-size:13px}
+.hand{font-family:'Caveat',cursive;font-size:26px;color:var(--pink);line-height:1.15}
+.box{width:100%;max-width:360px;background:var(--card);border-radius:18px;padding:18px;text-align:left}
+.mono{font:13px/1.7 ui-monospace,Menlo,monospace;letter-spacing:.06em;word-break:break-word;white-space:pre-wrap}
+.btn{border:0;border-radius:999px;background:var(--gold);color:#2a1a10;font:600 15px 'DM Sans',sans-serif;padding:13px 30px;cursor:pointer;position:relative;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none}
+.btn.hold::before{content:"";position:absolute;inset:0;width:calc(var(--p,0)*100%);background:rgba(255,255,255,.4)}
+.btn span{position:relative}
+.btn.ghost{background:none;border:1px solid var(--dim);color:var(--txt);touch-action:auto}
+.btn:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+/* lock */
+#s0{background:radial-gradient(circle at 50% 20%,#4a3330,var(--bg) 70%)}
+.pad{display:grid;grid-template-columns:repeat(3,64px);gap:12px}
+.pad button{height:64px;border-radius:50%;border:1px solid #ffffff22;background:#ffffff10;color:var(--txt);font-size:22px;cursor:pointer}
+.dots{display:flex;gap:14px;height:14px}.dots i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--dim)}.dots i.f{background:var(--gold);border-color:var(--gold)}
+.shake{animation:sh .4s}@keyframes sh{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+/* flowers */
+#s1{background:#1d1013;padding:0;gap:0;overflow:hidden}
+.fl{position:absolute;animation:bl 1.6s ease-out both}
+@keyframes bl{from{transform:scale(0) rotate(-40deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+/* ring */
+.ring{width:84px;height:84px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;font-size:30px;background:none;color:inherit;cursor:pointer;user-select:none;touch-action:none;box-shadow:0 0 calc(var(--p,0)*50px) var(--gold);transition:box-shadow .1s}
+/* letter */
+#s4{justify-content:flex-start;padding-top:32px}
+.letter{font:italic 500 16px/1.65 'Fraunces',Georgia,serif;display:flex;flex-direction:column;gap:12px}
+.letter h3{font:600 11px/1.4 'DM Sans',sans-serif;font-style:normal;letter-spacing:.08em;color:var(--pink)}
+.letter hr{border:0;border-top:1px solid #ffffff22}
+/* gallery */
+#s5{padding:20px 0;gap:12px}
+.gal{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;width:100%;padding:4px 8vw;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.ph{flex:0 0 84vw;max-width:340px;scroll-snap-align:center;background:var(--card);border-radius:14px;padding:10px 10px 14px;text-align:center}
+.ph .img{width:100%;aspect-ratio:3/4;border-radius:8px;background:linear-gradient(160deg,#5a3340,#2f1f1d);display:grid;place-items:center;font-size:44px;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .hand{font-size:22px;margin-top:8px}
+@media (prefers-reduced-motion:reduce){.fl{animation:none}}
+</style>
+</head>
+<body>
+
+<!-- lock -->
+<section class="scr on" id="s0">
+  <div class="dim" id="ask"></div>
+  <div class="dots" id="dots"><i></i><i></i><i></i><i></i></div>
+  <div class="pad" id="pad"></div>
+  <div class="dim" id="hint"></div>
+</section>
+
+<!-- flowers -->
+<section class="scr" id="s1"></section>
+
+<!-- chat acak -->
+<section class="scr" id="s2">
+  <div class="dim">pesan yang belum sempat terkirim</div>
+  <div class="box"><div class="dim" id="who"></div><div class="mono" id="msg" style="margin-top:8px"></div></div>
+  <button class="btn hold" id="h2"><span>Jangan dilepas...</span></button>
+  <div class="dim" id="note2">Tahan buat bacain isinya. Jangan dilepas ya.</div>
+  <button class="btn" id="n2" hidden>Lanjut</button>
+</section>
+
+<!-- hold to open -->
+<section class="scr" id="s3">
+  <div class="box" style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+    <div class="dim">satu pesan terkunci</div>
+    <h2 style="font-size:22px">Bagian paling jujur kakaa simpan di akhir.</h2>
+    <button class="ring" id="h3" aria-label="Tahan untuk buka">💌</button>
+    <b>Tahan buat buka</b><div class="dim">Jangan dilepas sampai cahayanya penuh ya</div>
+  </div>
+</section>
+
+<!-- letter -->
+<section class="scr" id="s4">
+  <div class="box"><div class="letter" id="letter"></div></div>
+  <button class="btn" id="n4">Lanjut</button>
+  <button class="btn ghost" id="redo">Baca lagi dari awal</button>
+</section>
+
+<!-- kenangan virtual -->
+<section class="scr" id="sk">
+  <div class="box" style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+    <div class="dim">satu lagi buat dedee</div>
+    <h2 style="font-size:22px">Ada yang kakaa simpan dari semua obrolan kita.</h2>
+    <button class="btn" id="kv">Kenangan virtual 📸</button>
+  </div>
+</section>
+
+<!-- gallery -->
+<section class="scr" id="s5">
+  <h2>Beberapa momen kita</h2>
+  <div class="dim">geser ke samping buat lihat semuanya</div>
+  <div class="gal" id="gal"></div>
+  <div class="dim" id="gcnt"></div>
+  <button class="btn ghost" id="back">Balik ke surat</button>
+</section>
+
+<script>
+/* ===== EDIT BAGIAN INI ===== */
+const C={
+  to:'Dedee Azzaa',
+  pin:'2708',
+  ask:'Kapan kita mulai chatan?',
+  chat:'KAKA BERSYUKUR BANGET BISA KENAL DEDEE, BARU KALI INI KAKA NGERASA PUNYA SAHABAT YANG NGERTI KAKAA MESKIPUN VIRTUAL, DAN JANJI KAKA SOAL MAIN KEKOTAMU ITU SERIUS. LOVE YOU🤍✨',
+  title:'PESAN YANG SEBENARNYA KAKAA MAU DEDEE TAU',
+  letter:[
+    'Jujur, tiap mau chat dedee, kakaa selalu mikir dedee bakal risih atau enggak. padahal aslinya Kakaa cuma pengen punya alasan buat ngobrol lebih lama sama dedee.',
+    'kakaa suka senyum pas lihat notif dari dedee, terus mendadak kaget atau bahkan loncat sendiri atau pas kaka lagi tidur aja bisa kebangun kaloo denger notif dede. karena notif dedee sengaja kakaa buat beda dari notif yang lainn. you are very special to me',
+    'kakaa bakal seneng banget kaloo misalnyaa dedee mulai chat duluan, tapii kadang kaloo dedee yang chat duluan kakaanya malah slowrespon dan itu pasti buat dedee jadii badmood bangett'
+  ],
+  question:'OHH IYAA SATU PERTANYAAN KAKAA YANG BELUM PERNAH DEDEE JAWAB. KAPAN TANGGAL LAHIR DEDEE🗿?',
+  /* taruh foto di folder "foto" (sebelah index.html), lalu samain nama file-nya di sini */
+  photos:[
+    {src:'foto/1.jpg',cap:'Caption foto pertama'},
+    {src:'foto/2.jpg',cap:'Caption foto kedua'},
+    {src:'foto/3.jpg',cap:'Caption foto ketiga'}
+  ]
+};
+/* =========================== */
+const $=s=>document.querySelector(s),R='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const scr=(t,p)=>[...t].map((c,i)=>/[A-Za-z]/.test(c)?(i<p*t.length?c:R[Math.random()*26|0]):c).join('');
+function go(id){document.querySelectorAll('.scr').forEach(e=>e.classList.toggle('on',e.id===id))}
+function hold(el,ms,onP,onDone){let t0,raf,done=0;const loop=()=>{const p=Math.min(1,(performance.now()-t0)/ms);el.style.setProperty('--p',p);onP(p);if(p>=1){done=1;onDone();return}raf=requestAnimationFrame(loop)};
+el.addEventListener('pointerdown',e=>{if(done)return;e.preventDefault();t0=performance.now();loop()});
+['pointerup','pointerleave','pointercancel'].forEach(k=>el.addEventListener(k,()=>{if(done)return;cancelAnimationFrame(raf);el.style.setProperty('--p',0);onP(0)}));
+el.addEventListener('contextmenu',e=>e.preventDefault())}
+
+/* lock */
+$('#ask').textContent=C.ask;
+let code='';
+const pad=$('#pad');
+['1','2','3','4','5','6','7','8','9','','0','⌫'].forEach(k=>{
+  const b=document.createElement('button');b.textContent=k;b.style.visibility=k?'visible':'hidden';
+  b.onclick=()=>{
+    code=k==='⌫'?code.slice(0,-1):(code.length<4?code+k:code);
+    document.querySelectorAll('#dots i').forEach((d,i)=>d.classList.toggle('f',i<code.length));
+    if(code.length===4){
+      if(code===C.pin){setTimeout(flowers,200)}
+      else{$('#dots').classList.add('shake');$('#hint').textContent='Belum tepat, coba lagi ya';
+        setTimeout(()=>{$('#dots').classList.remove('shake');code='';document.querySelectorAll('#dots i').forEach(d=>d.classList.remove('f'))},450)}
+    }
+  };pad.appendChild(b)});
+
+/* flowers */
+function flowers(){
+  go('s1');const s=$('#s1');s.innerHTML='';
+  const em=['🌸','🌺','🌷','🌼'];
+  for(let i=0;i<70;i++){const f=document.createElement('div');f.className='fl';f.textContent=em[i%4];
+    f.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${30+Math.random()*60}px;animation-delay:${Math.random()*.9}s`;s.appendChild(f)}
+  setTimeout(()=>go('s2'),2600);
+}
+
+/* chat acak */
+$('#who').textContent='buat '+C.to+' 🌙';
+const m=$('#msg');m.textContent=scr(C.chat,0);
+hold($('#h2'),4500,p=>{m.textContent=scr(C.chat,p);m.style.color=p>.3?'var(--pink)':''},()=>{
+  $('#note2').innerHTML='<b style="color:var(--gold)">UNTUK '+C.to.toUpperCase()+'</b>';
+  $('#n2').hidden=false;$('#h2').hidden=true});
+$('#n2').onclick=()=>go('s3');
+
+/* hold to open */
+hold($('#h3'),3000,()=>{},()=>{
+  $('#letter').innerHTML=`<h3>${C.title}</h3>`+C.letter.map(t=>`<p>${t}</p>`).join('')+`<hr><div class="hand">${C.question}</div>`;
+  go('s4')});
+$('#redo').onclick=()=>location.reload();
+
+/* gallery */
+const gal=$('#gal');
+C.photos.forEach(p=>{
+  const d=document.createElement('div');d.className='ph';
+  const box=document.createElement('div');box.className='img';
+  const im=new Image();im.alt=p.cap;im.loading='lazy';
+  im.onload=()=>{box.textContent='';box.appendChild(im)};
+  im.onerror=()=>{box.textContent='🌸'};
+  box.textContent='🌸';im.src=p.src;
+  const c=document.createElement('div');c.className='hand';c.textContent=p.cap;
+  d.append(box,c);gal.appendChild(d)});
+const gc=()=>{const w=gal.firstChild?gal.firstChild.offsetWidth+14:1;
+  $('#gcnt').textContent=(Math.min(C.photos.length,Math.round(gal.scrollLeft/w)+1))+' / '+C.photos.length};
+gal.addEventListener('scroll',gc);gc();
+$('#n4').onclick=()=>go('sk');
+$('#kv').onclick=()=>{go('s5');gc()};
+$('#back').onclick=()=>go('s4');
+</script>
+</body>
+</html>
